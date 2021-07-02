@@ -16,11 +16,27 @@ conda install seqtk -c bioconda
 seqtk mergepe R1.fasta.gz R2.fasta.gz > interleaved.fasta
 ```
 
+```
+  Usage: ./makeRecruitmentPlot.sh database_dir query.fa output_base
+
+  database_dir      directory that contains fasta files (must ends with .fasta) which will be the database [most likely your longer sequence]
+  query.fa      Fasta file that will be mapped to the database [most likely your reads]
+  output_base   Base name for the blast output and recruitment plots
+                blast output:         output_base.blst [Unique matches with over 70% coverage and 50 bp match]
+                recruitment object:   output_base.recruitment.out
+                recruitment pdf:      output_base.recruitment.pdf
+```
+
+
+
+
 ### Running using testing data
 ```
 ## on Linux
 git clone https://github.com/jianshu93/RecruitmentPlot_blast
 cd RecruitmentPlot_blast
+
+### Get example interleaved reads data mentioned above, genomes offered are binned and refine from this metagenome
 wget http://rothlab.com/Data/T4AerOil_sbsmpl5.fa.gz
 mv T4AerOil_sbsmpl5.fa.gz ./demo_input
 gunzip ./demo_input/T4AerOil_sbsmpl5.fa.gz
@@ -30,6 +46,7 @@ gunzip ./demo_input/T4AerOil_sbsmpl5.fa.gz
 brew install grep
 git clone https://github.com/jianshu93/RecruitmentPlot_blast
 cd RecruitmentPlot_blast
+### Get example interleaved reads data mentioned above, genomes offered are binned and refine from this metagenome
 wget http://rothlab.com/Data/T4AerOil_sbsmpl5.fa.gz
 mv T4AerOil_sbsmpl5.fa.gz ./demo_input
 gunzip ./demo_input/T4AerOil_sbsmpl5.fa.gz
