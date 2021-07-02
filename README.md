@@ -26,7 +26,7 @@ git clone https://github.com/lmrodriguezr/enveomics
 wget http://rothlab.com/Data/T4AerOil_sbsmpl5.fa.gz
 mv T4AerOil_sbsmpl5.fa.gz ./demo_input
 gunzip ./demo_input/T4AerOil_sbsmpl5.fa.gz
-./makeRecruitmentPlot_linux.sh ./demo_input/MAG ./demo_input/T4AerOil_sbsmpl5.fa ./out/try
+./makeRecruitmentPlot_linux.sh ./demo_input/MAG ./demo_input/T4AerOil_sbsmpl5.fa try
 
 ## on MacOS, install homebrew first
 brew install grep
@@ -36,7 +36,8 @@ cd RecruitmentPlot_blast
 git clone https://github.com/lmrodriguezr/enveomics
 wget http://rothlab.com/Data/T4AerOil_sbsmpl5.fa.gz
 mv T4AerOil_sbsmpl5.fa.gz ./demo_input
-./makeRecruitmentPlot.sh ./demo_input/MAG ./demo_input/T4AerOil_sbsmpl5.fa ./out/try
+gunzip ./demo_input/T4AerOil_sbsmpl5.fa.gz
+./makeRecruitmentPlot.sh ./demo_input/MAG ./demo_input/T4AerOil_sbsmpl5.fa try
 
 ```
 
