@@ -1,5 +1,5 @@
-## This is wrapper for recuitment plot based on blast
-You mush have R and Perl installed on your machine. By default perl is installed on Linux and MacOS. You need to install R for plotting. I want to thank Genevie for the first version. Please contact me jianshuzhao@yahoo.com
+## Recruitment plot based on Blast
+This is wrapper for recuitment plot based on blast based on the recruitment plot function in enevoemics package. You mush have R and Perl installed on your machine. By default perl is installed on Linux and MacOS. You need to install R for plotting. I want to thank Genevie for the first version. Please contact me jianshuzhao@yahoo.com
 
 
 
@@ -16,13 +16,11 @@ conda install seqtk -c bioconda
 seqtk mergepe R1.fasta.gz R2.fasta.gz > interleaved.fasta
 ```
 
-### Running
+### Running using testing data
 ```
 ## on Linux
 git clone https://github.com/jianshu93/RecruitmentPlot_blast
 cd RecruitmentPlot_blast
-### get enveomics package (enveomics folder must be in the RecruitmentPlot_blast directory )
-git clone https://github.com/lmrodriguezr/enveomics
 wget http://rothlab.com/Data/T4AerOil_sbsmpl5.fa.gz
 mv T4AerOil_sbsmpl5.fa.gz ./demo_input
 gunzip ./demo_input/T4AerOil_sbsmpl5.fa.gz
@@ -32,8 +30,6 @@ gunzip ./demo_input/T4AerOil_sbsmpl5.fa.gz
 brew install grep
 git clone https://github.com/jianshu93/RecruitmentPlot_blast
 cd RecruitmentPlot_blast
-### get enveomics package
-git clone https://github.com/lmrodriguezr/enveomics
 wget http://rothlab.com/Data/T4AerOil_sbsmpl5.fa.gz
 mv T4AerOil_sbsmpl5.fa.gz ./demo_input
 gunzip ./demo_input/T4AerOil_sbsmpl5.fa.gz
