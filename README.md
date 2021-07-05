@@ -41,6 +41,9 @@ rm *.fasta
 wget http://rothlab.com/Data/T4AerOil_sbsmpl5.fa.gz
 mv T4AerOil_sbsmpl5.fa.gz ./demo_input
 gunzip ./demo_input/T4AerOil_sbsmpl5.fa.gz
+chmod a+x ./*.pl
+chmod a+x ./*.sh
+chmod a+x ./dependencies/*
 ./makeRecruitmentPlot_linux.sh ./demo_input/MAG ./demo_input/T4AerOil_sbsmpl5.fa try
 
 ## on MacOS, install homebrew first
@@ -51,6 +54,9 @@ cd RecruitmentPlot_blast
 wget http://rothlab.com/Data/T4AerOil_sbsmpl5.fa.gz
 mv T4AerOil_sbsmpl5.fa.gz ./demo_input
 gunzip ./demo_input/T4AerOil_sbsmpl5.fa.gz
+chmod a+x ./*.pl
+chmod a+x ./*.sh
+chmod a+x ./dependencies/*
 ./makeRecruitmentPlot.sh ./demo_input/MAG ./demo_input/T4AerOil_sbsmpl5.fa try
 
 ```
