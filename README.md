@@ -35,16 +35,18 @@ seqtk mergepe R1.fasta.gz R2.fasta.gz > interleaved.fasta
 ## on Linux
 git clone https://github.com/jianshu93/RecruitmentPlot_blast
 cd RecruitmentPlot_blast
-## remove all fasta files in this directory if you run for a second time
-rm *.fasta
-### Get example interleaved reads data mentioned above, genomes offered are binned and refine from this metagenome. Creat your own interleaved fasta file using seqtk if you like
+
+### Get example interleaved reads data mentioned above, genomes offered are binned and refine from this metagenome
 wget http://rothlab.com/Data/T4AerOil_sbsmpl5.fa.gz
 mv T4AerOil_sbsmpl5.fa.gz ./demo_input
 gunzip ./demo_input/T4AerOil_sbsmpl5.fa.gz
-chmod a+x ./*.pl
-chmod a+x ./*.sh
-chmod a+x ./dependencies/*
+
+### run default fast mode (megablast)
 ./makeRecruitmentPlot_linux.sh ./demo_input/MAG ./demo_input/T4AerOil_sbsmpl5.fa try
+
+### run the orginal blastn algorithm, which is very slow but very useful for check sequence discrete population
+./makeRecruitmentPlot_linux_blastN.sh ./demo_input/MAG ./demo_input/T4AerOil_sbsmpl5.fa try
+
 
 ## on MacOS, install homebrew first
 brew install grep
@@ -54,9 +56,6 @@ cd RecruitmentPlot_blast
 wget http://rothlab.com/Data/T4AerOil_sbsmpl5.fa.gz
 mv T4AerOil_sbsmpl5.fa.gz ./demo_input
 gunzip ./demo_input/T4AerOil_sbsmpl5.fa.gz
-chmod a+x ./*.pl
-chmod a+x ./*.sh
-chmod a+x ./dependencies/*
 ./makeRecruitmentPlot.sh ./demo_input/MAG ./demo_input/T4AerOil_sbsmpl5.fa try
 
 ```
