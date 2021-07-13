@@ -56,7 +56,7 @@ cd RecruitmentPlot_blast
 wget http://rothlab.com/Data/T4AerOil_sbsmpl5.fa.gz
 mv T4AerOil_sbsmpl5.fa.gz ./demo_input
 gunzip ./demo_input/T4AerOil_sbsmpl5.fa.gz
-./makeRecruitmentPlot.sh ./demo_input/MAG ./demo_input/T4AerOil_sbsmpl5.fa try
+./makeRecruitmentPlot_darwin.sh ./demo_input/MAG ./demo_input/T4AerOil_sbsmpl5.fa try
 
 ```
 
