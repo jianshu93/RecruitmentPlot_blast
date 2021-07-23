@@ -100,7 +100,7 @@ else
   echo "Making BLAST database..."
   makeblastdb -in $database_all -dbtype nucl
   echo "Running BLAST with 70% identity cutoff..."
-  blastn -db $database_all -query $reads -outfmt 6 -out $output.tmp.orig.blst -task blastn -outfmt '6 qseqid sseqid pident length mismatch gapopen qstart qend sstart send evalue bitscore qlen slen'
+  blastn -db $database_all -query $reads -out $output.tmp.orig.blst -task blastn -outfmt '6 qseqid sseqid pident length mismatch gapopen qstart qend sstart send evalue bitscore qlen slen'
   echo "Done with BLAST..."
   #Filter for length
   echo "Adding length of query to blast result and filtering for 90% match"
