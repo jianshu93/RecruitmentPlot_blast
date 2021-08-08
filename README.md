@@ -44,6 +44,9 @@ gunzip ./demo_input/T4AerOil_sbsmpl5.fa.gz
 ### run default fast mode (megablast)
 ./makeRecruitmentPlot_linux.sh ./demo_input/MAG ./demo_input/T4AerOil_sbsmpl5.fa try
 
+### run ublast, there are more low identity reads mapped between id 70%-80% but is much faster than than original blastN algorithm (see below). You must have usearch installed. For large dataset you may need the 64 bit version
+./makeRecruitmentPlot_ublast.sh ./demo_input/MAG ./demo_input/T4AerOil_sbsmpl5.fa try
+
 ### run the orginal blastn algorithm, which is very slow but very useful for check sequence discrete population (low identity matches to reference)
 ./makeRecruitmentPlot_linux_blastN.sh ./demo_input/MAG ./demo_input/T4AerOil_sbsmpl5.fa try
 
