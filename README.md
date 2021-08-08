@@ -17,11 +17,11 @@ seqtk mergepe R1.fasta.gz R2.fasta.gz > interleaved.fasta
 ```
 
 ```
-  Usage: ./makeRecruitmentPlot.sh database_dir query.fa output_base
+  Usage: ./makeRecruitmentPlot.sh database_dir query.fa output_dir
 
   database_dir      directory that contains fasta files (must ends with .fasta) which will be the database [most likely your longer sequence]
   query.fa      Interleaved Fasta file that will be mapped to the database [most likely your reads]
-  output_base   Base name for the blast output and recruitment plots
+  output_dir    output directory for the blast output and recruitment plots
                 blast output:         output_base.blst [Unique matches with over 70% coverage and 50 bp match]
                 recruitment object:   output_base.recruitment.out
                 recruitment pdf:      output_base.recruitment.pdf
@@ -44,7 +44,7 @@ gunzip ./demo_input/T4AerOil_sbsmpl5.fa.gz
 ### run default fast mode (megablast)
 ./makeRecruitmentPlot_linux.sh ./demo_input/MAG ./demo_input/T4AerOil_sbsmpl5.fa try
 
-### run the orginal blastn algorithm, which is very slow but very useful for check sequence discrete population
+### run the orginal blastn algorithm, which is very slow but very useful for check sequence discrete population (low identity matches to reference)
 ./makeRecruitmentPlot_linux_blastN.sh ./demo_input/MAG ./demo_input/T4AerOil_sbsmpl5.fa try
 
 
