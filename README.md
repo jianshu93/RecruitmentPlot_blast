@@ -70,7 +70,7 @@ lab5_MAG_001 recruitment plot
 
 ### See an example for the demo dataset using megablast algorithm
 lab5_MAG_001 recruitment plot
-
+![lab5_MAG 001 megablast recruitment](https://user-images.githubusercontent.com/38149286/128648845-0582b94b-44f3-4508-8f33-a5230a4aecac.jpg)
 
 ### Reference
 
