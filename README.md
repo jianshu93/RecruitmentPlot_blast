@@ -1,9 +1,9 @@
 ## Recruitment plot based on Blast
-This is wrapper for recuitment plot based on blast based on the recruitment plot function in enevoemics package. You mush have R and Perl installed on your machine. By default perl is installed on Linux and MacOS. You need to install R for plotting. I want to thank Genevie for the first version. Please contact me jianshuzhao@yahoo.com
+This is wrapper for recuitment plot based on blast. It was developed based on the recruitment plot function in enevoemics package. You must have R and Perl installed on your machine. By default perl is installed on Linux and MacOS. You need to install R for plotting. I want to thank Genevie for the first version. This is a collective effort by the kostas lab. Please contact me jianshuzhao@yahoo.com
 
 
 
-You can create as many plots as you want parallelly. The blast step take some time. For a metagenomes with 3.0 GB (forwared reads only, unzipped) and 14 reference genomes. It take 2 hours.
+You can create as many plots as you want parallelly. The blast step take some time. For a metagenomes with 3.0 GB (forwared reads only, unzipped) and 14 reference genomes. It take 2 hours. For orginal blastN algorithm, it is much slower. There might be some problems when installing R packages for some Linux platforms. Let me know when you have any of those problems. I recommend R 4.0.5 (the newest version at the time of developing).
 
 blast+ and seqtk must be installed for alignment. If you are using conda, run conda install -c bioconda blast seqtk
 
