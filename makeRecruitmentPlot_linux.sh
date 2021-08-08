@@ -4,11 +4,11 @@
 if [[ "$1" == "" || "$1" == "-h" || "$2" == "" || "$3" == "" ]]
 then
   echo "
-  Usage: ./makeRecruitmentPlot.sh database_dir query.fa output_base
+  Usage: ./makeRecruitmentPlot.sh database_dir query.fa output_dir
 
   database_dir      directory that contains fasta files (must ends with .fasta) which will be the database [most likely your longer sequence]
   query.fa      Fasta file that will be mapped to the database [most likely your reads]
-  output_base   Base name for the blast output and recruitment plots
+  output_dir    directory for the blast output and recruitment plots
                 blast output:         output_base.blst [Unique matches with over 70% coverage and 50 bp match]
                 recruitment object:   output_base.recruitment.out
                 recruitment pdf:      output_base.recruitment.pdf
@@ -26,10 +26,13 @@ then
     echo "blastn could not be found, please install it via conda or from source"
     exit
 fi
-if ! command -v seqtk &> /dev/null
+
+if [ -d "$output" ] 
 then
-    echo "seqtk could not be found, please install it via conda or from source"
-    exit
+    echo "Directory $output already exists. MAKE SURE you want to do this"
+else
+    echo "making directory $output ..."
+    $(mkdir $output)
 fi
 
 if [ -d "$database" ]; then
@@ -38,29 +41,30 @@ if [ -d "$database" ]; then
     for F in $dfiles; do
 	      BASE=${F##*/}
 	      SAMPLE=${BASE%.*}
-        $(./dependencies/seqtk_linux rename $F ${SAMPLE}. > ./${SAMPLE}.all.fasta)
-        $(./dependencies/seqtk_linux seq -C ./${SAMPLE}.all.fasta > ./${SAMPLE}.fasta)
-        $(rm ./${SAMPLE}.all.fasta)
-        $(cat ./${SAMPLE}.fasta >> ./all_mags_rename.fa)
+        $(./dependencies/seqtk_linux rename $F ${SAMPLE}. > $output/${SAMPLE}.all.fasta)
+        $(./dependencies/seqtk_linux seq -C $output/${SAMPLE}.all.fasta > $output/${SAMPLE}.fasta)
+        $(rm $output/${SAMPLE}.all.fasta)
+        $(cat $output/${SAMPLE}.fasta >> $output/all_mags_rename.fa)
     done
 else
     echo "input directory does not exist, please offer a directory that exists (must ends with fasta files)"
     exit 1
 fi
 
-database_all=./all_mags_rename.fa
+database_all=$output/all_mags_rename.fa
 #variables
 enveomics="./enveomics"
 BLAST=0
 
+
 #Reformat fastas
-if [[ -s all_mags_rename.reformatted ]]
+if [[ -s $output/all_mags_rename.reformatted ]]
 then
-  database_all=all_mags_rename.reformatted
+  database_all=$output/all_mags_rename.reformatted
 else
   #check if file needs it
-  num_lines=$(wc -l all_mags_rename.fa | head -n1 | awk '{print $1;}')
-  num_headers=$(grep ">" all_mags_rename.fa | wc -l)
+  num_lines=$(wc -l $output/all_mags_rename.fa | head -n1 | awk '{print $1;}')
+  num_headers=$(grep ">" $output/all_mags_rename.fa | wc -l)
   num_headers=$((num_headers * 2))
   if [[ $num_headers -eq $num_lines ]]
   then
@@ -68,15 +72,15 @@ else
   else
     #reformat the fasta and rename the variable
     echo "Reformatting the $database file so seqs are on one line..."
-    ./FastA.reformat.oneline.pl -i all_mags_rename.fa -o all_mags_rename.reformatted
+    ./FastA.reformat.oneline.pl -i $output/all_mags_rename.fa -o $output/all_mags_rename.reformatted
     echo "Done reformatting $database..."
-    database_all=all_mags_rename.reformatted
+    database_all=$output/all_mags_rename.reformatted
   fi
 fi
 
-if [[ -s $reads.reformatted ]]
+if [[ -s $output/$reads.reformatted ]]
 then
-  reads=$reads.reformatted
+  reads=$output/$reads.reformatted
 else
   #Check reformatting the other file
   num_lines=$(wc -l $reads | head -n1 | awk '{print $1;}')
@@ -88,16 +92,16 @@ else
   else
     #reformat the fasta and rename the variable
     echo "Reformatting the $reads file so seqs are on one line..."
-    ./FastA.reformat.oneline.pl -i $reads -o $reads.reformatted
+    ./FastA.reformat.oneline.pl -i $reads -o $output/$reads.reformatted
     echo "Done reformatting $reads..."
-    reads=$reads.reformatted
+    reads=$output/$reads.reformatted
   fi
 fi
 
 #Check to see if the final blast file is present
-if [[ -s $output.blst ]]
+if [[ -s $output/final.blst ]]
 then
-  echo "Final blast file found. Not running blast again or filtering..."
+  echo "Final blast file found in the output directory you provided. Not running blast again or filtering..."
   echo "Now running recruitment plot scripts..."
   BLAST=1
 else
@@ -105,14 +109,14 @@ else
   echo "Making BLAST database..."
   makeblastdb -in $database_all -dbtype nucl
   echo "Running BLAST with 70% identity cutoff..."
-  blastn -db $database_all -query $reads -outfmt 6 -out $output.tmp.orig.blst -perc_identity 70
+  blastn -db $database_all -query $reads -out $output/tmp.orig.blst -outfmt '6 qseqid sseqid pident length mismatch gapopen qstart qend sstart send evalue bitscore qlen slen'
   echo "Done with BLAST..."
   #Filter for length
   echo "Adding length of query to blast result and filtering for 90% match"
-  ./BlastTab.addlen.pl -i $reads -b $output.tmp.orig.blst -o $output.tmp.length.blst
+  ./BlastTab.addlen.pl -i $reads -b $output/tmp.orig.blst -o $output/tmp.length.blst
   #Filter for best match
   echo "Only keeping best match from BLAST results..."
-  ./BlastTab.besthit.pl -b $output.tmp.length.blst -o $output.blst
+  ./BlastTab.besthit.pl -b $output/tmp.length.blst -o $output/final.blst
 fi
 
 ### install dependencies
@@ -121,37 +125,37 @@ Rscript -e "install.packages('enveomics.R', repos = 'http://cran.rstudio.com/', 
 Rscript -e "install.packages('optparse', repos = 'http://cran.rstudio.com/', quiet = TRUE)"
 
 #extract blast for each genome and build recruitment plot
-dfiles=./*.fasta
+dfiles=$output/*.fasta
 for F in $dfiles; do
 	BASE=${F##*/}
 	SAMPLE=${BASE%.*}
-    $(grep -E "*${SAMPLE}.*" $output.blst > ./$SAMPLE.blst)
-    $enveomics/Scripts/BlastTab.catsbj.pl ./$SAMPLE.fasta ./$SAMPLE.blst 
-    Rscript $enveomics/Scripts/BlastTab.recplot2.R --threads 24 --prefix ./$SAMPLE.blst ./$SAMPLE.recruitment.Rdata ./$SAMPLE.recruitment.pdf
-    rm ./$SAMPLE.blst.lim
-    rm ./$SAMPLE.blst.rec
+    $(grep -E "*${SAMPLE}.*" $output/final.blst > $output/$SAMPLE.blst)
+    $enveomics/Scripts/BlastTab.catsbj.pl $output/$SAMPLE.fasta $output/$SAMPLE.blst 
+    Rscript $enveomics/Scripts/BlastTab.recplot2.R --threads 24 --prefix $output/$SAMPLE.blst $output/$SAMPLE.recruitment.Rdata $output/$SAMPLE.recruitment.pdf
+    rm $output/$SAMPLE.blst.lim
+    rm $output/$SAMPLE.blst.rec
     echo "
     Plot is finished. Output files:
-    $SAMPLE.blst
-    $SAMPLE.recruitment.Rdata
-    $SAMPLE.recruitment.pdf"
+    $output/$SAMPLE.blst
+    $output/$SAMPLE.recruitment.Rdata
+    $output/$SAMPLE.recruitment.pdf"
 done
 #print statistics
 if [[ $BLAST -eq 0 ]]
 then
-  num_orig=$(wc -l $output.tmp.orig.blst | head -n1 | awk '{print $1;}')
-  num_length=$(wc -l $output.tmp.length.blst | head -n1 | awk '{print $1;}')
-  num_best=$(wc -l $output.blst | head -n1 | awk '{print $1;}')
+  num_orig=$(wc -l $output/tmp.orig.blst | head -n1 | awk '{print $1;}')
+  num_length=$(wc -l $output/tmp.length.blst | head -n1 | awk '{print $1;}')
+  num_best=$(wc -l $output/final.blst | head -n1 | awk '{print $1;}')
   echo "
       Original number of blast hits:                            $num_orig
       Number of blast hits after filter for length of match:    $num_length
       Number of blast hits after filter for best match:         $num_best"
 
   #remove temporary files
-  rm $output.tmp.orig.blst
-  rm $output.tmp.length.blst
+  rm $output/tmp.orig.blst
+  rm $output/tmp.length.blst
 else
-  num_best=$(wc -l $output.blst | head -n1 | awk '{print $1;}')
+  num_best=$(wc -l $output/final.blst | head -n1 | awk '{print $1;}')
   echo "
     Number of blast hits:         $num_best"
 fi
