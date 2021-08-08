@@ -60,9 +60,17 @@ gunzip ./demo_input/T4AerOil_sbsmpl5.fa.gz
 
 ```
 
-### See an example for the demo dataset
+### See an example for the demo dataset using blastN algorithm
 lab5_MAG_001 recruitment plot
 ![lab5_MAG 001 recruitment](https://user-images.githubusercontent.com/38149286/124207245-13bbad80-dab3-11eb-84be-ca02ae623a16.jpg)
+
+### See an example for the demo dataset using ublast algorithm
+lab5_MAG_001 recruitment plot
+![lab5_MAG 001 recruitment](https://user-images.githubusercontent.com/38149286/128647005-d79bf55b-2b95-491a-b717-f2176feee8ec.jpg)
+
+### See an example for the demo dataset using megablast algorithm
+lab5_MAG_001 recruitment plot
+
 
 ### Reference
 
