@@ -35,6 +35,7 @@ seqtk mergepe R1.fasta.gz R2.fasta.gz > interleaved.fasta
 ## on Linux
 git clone https://github.com/jianshu93/RecruitmentPlot_blast
 cd RecruitmentPlot_blast
+chmod -R a+x ./*
 
 ### Get example interleaved reads data mentioned above, genomes offered are binned and refined from this metagenome
 wget http://rothlab.com/Data/T4AerOil_sbsmpl5.fa.gz
@@ -55,6 +56,7 @@ gunzip ./demo_input/T4AerOil_sbsmpl5.fa.gz
 brew install grep
 git clone https://github.com/jianshu93/RecruitmentPlot_blast
 cd RecruitmentPlot_blast
+chmod -R a+x ./*
 ### Get example interleaved reads data mentioned above, genomes offered are binned and refine from this metagenome
 wget http://rothlab.com/Data/T4AerOil_sbsmpl5.fa.gz
 mv T4AerOil_sbsmpl5.fa.gz ./demo_input
