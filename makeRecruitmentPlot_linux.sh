@@ -6,12 +6,12 @@ then
   echo "
   Usage: ./makeRecruitmentPlot.sh database_dir query.fa output_dir
 
-  database_dir      directory that contains fasta files (must ends with .fasta) which will be the database [most likely your longer sequence]
-  query.fa      Fasta file that will be mapped to the database [most likely your reads]
+  database_dir      directory that contains genome fasta files (must ends with .fasta) which will be the database [most likely your longer sequence]
+  query.fa      Fasta file that will be mapped to the database [most likely your reads, interleaved reads in fasta format is expected]
   output_dir    directory for the blast output and recruitment plots
-                blast output:         output_base.blst [Unique matches with over 70% coverage and 50 bp match]
-                recruitment object:   output_base.recruitment.out
-                recruitment pdf:      output_base.recruitment.pdf
+                blast output:         final.blst [Unique matches with over 90% coverage, 70% identity and 50 bp match]
+                recruitment object:   genome_name.recruitment.Rdata
+                recruitment pdf:      genome_name.recruitment.pdf
   " >&2
   exit 1
 fi
@@ -109,7 +109,7 @@ else
   echo "Making BLAST database..."
   makeblastdb -in $database_all -dbtype nucl
   echo "Running BLAST with 70% identity cutoff..."
-  blastn -db $database_all -query $reads -out $output/tmp.orig.blst -outfmt '6 qseqid sseqid pident length mismatch gapopen qstart qend sstart send evalue bitscore qlen slen'
+  blastn -db $database_all -query $reads -out $output/tmp.orig.blst -evalue 1e-9 -outfmt '6 qseqid sseqid pident length mismatch gapopen qstart qend sstart send evalue bitscore qlen slen'
   echo "Done with BLAST..."
   #Filter for length
   echo "Adding length of query to blast result and filtering for 90% match"

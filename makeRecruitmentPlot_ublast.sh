@@ -6,12 +6,12 @@ then
   echo "
   Usage: ./makeRecruitmentPlot.sh database_dir query.fa output_dir
 
-  database_dir      directory that contains fasta files (must ends with .fasta) which will be the database [most likely your longer sequence]
-  query.fa      Fasta file that will be mapped to the database [most likely your reads]
+  database_dir      directory that contains genome fasta files (must ends with .fasta) which will be the database [most likely your longer sequence]
+  query.fa      Fasta file that will be mapped to the database [most likely your reads, interleaved reads in fasta format is expected]
   output_dir    output directory for the blast output and recruitment plots
-                blast output:         output_base.blst [Unique matches with over 70% coverage and 50 bp match]
-                recruitment object:   output_base.recruitment.out
-                recruitment pdf:      output_base.recruitment.pdf
+                blast output:         final.blst [Unique matches with over 90% coverage, 70% identity and 50 bp match]
+                recruitment object:   genome_name.recruitment.out
+                recruitment pdf:      genome_name.recruitment.pdf
   " >&2
   exit 1
 fi
@@ -23,7 +23,7 @@ output=$3
 
 if ! command -v usearch &> /dev/null
 then
-    echo "usearch could not be found, please install it via conda or from source"
+    echo "usearch could not be found, please install it, for large dataset, 64 bit may be needed"
     exit
 fi
 
