@@ -16,10 +16,6 @@ then
   exit 1
 fi
 
-
-
-
-
 #stores file names
 database=$1
 reads=$2
@@ -113,14 +109,14 @@ else
   usearch -makeudb_ublast $database_all -output $database_all.udb
 
   echo "Running UBLAST with 70% identity cutoff and 90% query alignment ratio..."
-  usearch -ublast $reads -db $database_all.udb -userout $output/tmp.orig.blst -evalue 1e-9 -id 0.3 -strand both -threads $(nproc) -userfields query+target+id+alnlen+mism+opens+qlo+qhi+tlo+thi+evalue+bits+ql+tl 
+  usearch -ublast $reads -db $database_all.udb -userout $output/tmp.orig.blst -evalue 1e-9 -query_cov 0.9 -id 0.7 -strand both -threads $(nproc) -userfields query+target+id+alnlen+mism+opens+qlo+qhi+tlo+thi+evalue+bits+ql+tl 
   echo "Done with UBLAST..."
   #Filter for length
-  echo "Adding length of query to blast result and filtering for 90% match"
-  ./BlastTab.addlen.pl -i $reads -b $output/tmp.orig.blst -o $output/tmp.length.blst
+  #echo "Adding length of query to blast result and filtering for 90% match"
+  #./BlastTab.addlen.pl -i $reads -b $output/tmp.orig.blst -o $output/tmp.length.blst
   #Filter for best match
   echo "Only keeping best match from BLAST results..."
-  ./BlastTab.besthit.pl -b $output/tmp.length.blst -o $output/final.blst
+  ./BlastTab.besthit.pl -b $output/tmp.orig.blst -o $output/final.blst
 fi
 
 ### install dependencies
