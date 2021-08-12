@@ -109,7 +109,7 @@ else
   usearch -makeudb_ublast $database_all -output $database_all.udb
 
   echo "Running UBLAST with 70% identity cutoff and 90% query alignment ratio..."
-  usearch -ublast $reads -db $database_all.udb -userout $output/tmp.orig.blst -evalue 1e-9 -query_cov 0.9 -id 0.7 -strand both -threads $(nproc) -userfields query+target+id+alnlen+mism+opens+qlo+qhi+tlo+thi+evalue+bits+ql+tl 
+  usearch -ublast $reads -db $database_all.udb -top_hits_only -accel 0.8 -userout $output/tmp.orig.blst -evalue 1e-9 -query_cov 0.9 -id 0.7 -strand both -threads $(nproc) -userfields query+target+id+alnlen+mism+opens+qlo+qhi+tlo+thi+evalue+bits+ql+tl 
   echo "Done with UBLAST..."
   #Filter for length
   #echo "Adding length of query to blast result and filtering for 90% match"
@@ -153,7 +153,7 @@ then
 
   #remove temporary files
   rm $output/tmp.orig.blst
-  rm $output/tmp.length.blst
+  ###rm $output/tmp.length.blst
 else
   num_best=$(wc -l $output/final.blst | head -n1 | awk '{print $1;}')
   echo "
