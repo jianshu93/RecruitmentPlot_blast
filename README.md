@@ -1,5 +1,5 @@
 ## Recruitment plot based on Blast
-This is wrapper for recuitment plot based on blast based on the recruitment plot function in enevoemics package. You mush have R and Perl installed on your machine. By default perl is installed on Linux and MacOS. You need to install R for plotting. I want to thank Genevie for the first version. Please contact me jianshuzhao@yahoo.com
+This is wrapper for recuitment plot based on blast based on the recruitment plot function in enevoemics package. You mush have R and Perl installed on your machine. By default perl is installed on Linux and MacOS. You need to install R for plotting (R4.0.5 or higher is recommended). I want to thank Genevie for the first version. Please contact me jianshuzhao@yahoo.com
 
 ## IMPORTANT
 You must have blast v2.12.0 for now because this version has a great imporvement of parallelism for large metagenomes. Early version will not be used and there will be an error.
