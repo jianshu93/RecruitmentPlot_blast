@@ -1,6 +1,9 @@
 ## Recruitment plot based on Blast
 This is wrapper for recuitment plot based on blast based on the recruitment plot function in enevoemics package. You mush have R and Perl installed on your machine. By default perl is installed on Linux and MacOS. You need to install R for plotting (R4.0.5 or higher is recommended). I want to thank Genevie for the first version. Please contact me jianshuzhao@yahoo.com
 
+## Biological meaningness
+For any metagenome from environment, high quality genomes should have a reads mapping gap following blastN algorithm (-task blastn, slow but very sentitive at low identity regions), any other mappers like bwa, bowtie2 and minimaps will miss a lot of low identity reads especailly less than 80% identity so the reads mapping gap will disappear. The gap you see at the end of this page showed a great example of seuqences discret population (Aka, microbial population for a species). You must do competitive mapping for all MAGs you recovered from this sample with the blastN algorithm to see it.
+
 ## IMPORTANT
 You must have blast v2.12.0 for now because this version has a great imporvement of parallelism for large metagenomes. Early version will not be used and there will be an error.
 
