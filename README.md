@@ -65,10 +65,12 @@ gunzip ./demo_input/T4AerOil_sbsmpl5.fa.gz
 
 ```
 
-### See an example for the demo dataset
+### See 2 examples for the demo dataset
 lab5_MAG_001 recruitment plot
 ![lab5_MAG 001 recruitment](https://user-images.githubusercontent.com/38149286/124207245-13bbad80-dab3-11eb-84be-ca02ae623a16.jpg)
 
+lab5_MAG_002 recruitment plot
+![lab5_MAG 002 recruitment](https://user-images.githubusercontent.com/38149286/138375746-dac19ebf-5cf9-4ed0-894d-4e151d9c3524.jpg)
 ### Reference
 
 Rodriguez-R, Luis M. and Konstantinos T. Konstantinidis. 2016. “The Enveomics Collection: a Toolbox for Specialized Analyses of Microbial Genomes and Metagenomes.” PeerJ 1–16.
