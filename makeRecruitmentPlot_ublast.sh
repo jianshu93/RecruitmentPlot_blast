@@ -104,7 +104,7 @@ then
   echo "Now running recruitment plot scripts..."
   USEARCH=1
 else
-  #Run ublast
+  #Run ublast, usearch was open-sourced in 2024! use it!
   echo "Making UBLAST database..."
   usearch -makeudb_ublast $database_all -output $database_all.udb
 
