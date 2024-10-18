@@ -16,6 +16,7 @@ then
   exit 1
 fi
 
+
 #stores file names
 database=$1
 reads=$2
