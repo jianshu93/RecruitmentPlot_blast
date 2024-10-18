@@ -1,6 +1,6 @@
 #!/usr/bin/env perl
 
-# @author: Luis M. Rodriguez-R
+# @author: Luis M. Rodriguez-R, modified by Jianshu Zhao
 # @license: Artistic-2.0
 
 use warnings;
