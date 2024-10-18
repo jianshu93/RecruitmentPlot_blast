@@ -5,7 +5,7 @@ This is wrapper for recuitment plot based on blast based on the recruitment plot
 For any metagenome from environment, high quality genomes should have a reads mapping gap following blastN algorithm (-task blastn, slow but very sentitive at low identity regions), any other mappers like bwa, bowtie2 and minimaps will miss a lot of low identity reads especailly less than 80% identity so the reads mapping gap will disappear. The gap you see at the end of this page showed a great example of seuqences discret population (Aka, microbial population for a species). You must do competitive mapping for all MAGs you recovered from this sample with the blastN algorithm to see it.
 
 ## IMPORTANT
-You must have blast v2.12.0 for now because this version has a great imporvement of parallelism for large metagenomes. Early version will not be used and there will be an error.
+You must have blast v2.14.0 or above because this version has a great imporvement of parallelism for large metagenomes. Early version will not be used and there will be an error.
 
 You can create as many plots as you want parallelly. The blast step take some time. For a metagenomes with 3.0 GB (forwared reads only, unzipped) and 14 reference genomes. It take 2 hours.
 
