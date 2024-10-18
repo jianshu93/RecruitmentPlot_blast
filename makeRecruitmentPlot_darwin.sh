@@ -1,5 +1,6 @@
 #!/bin/bash
 
+
 #checks for usage
 if [[ "$1" == "" || "$1" == "-h" || "$2" == "" || "$3" == "" ]]
 then
