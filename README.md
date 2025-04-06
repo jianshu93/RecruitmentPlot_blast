@@ -51,6 +51,8 @@ gunzip ./demo_input/T4AerOil_sbsmpl5.fa.gz
 ### run default fast mode (megablast)
 ./makeRecruitmentPlot_linux.sh ./demo_input/MAG ./demo_input/T4AerOil_sbsmpl5.fa try
 
+### Run HS-BLASTN mode, 2 to 4 times faster than megablast, see repo here: https://github.com/jianshu93/HS-BLASTN
+./makeRecruitmentPlot_linux_hs-megablast.sh ./demo_input/MAG ./demo_input/T4AerOil_sbsmpl5.fa try
 
 ## on MacOS, install homebrew first
 brew install grep
